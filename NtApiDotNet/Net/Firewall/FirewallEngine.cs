@@ -616,6 +616,23 @@ namespace NtApiDotNet.Net.Firewall
         }
 
         /// <summary>
+        /// Add a sublayer.
+        /// </summary>
+        /// <param name="builder">The builder used to create the filter.</param>
+        /// <param name="security_descriptor">Optional security descriptor.</param>
+        /// <param name="throw_on_error">True to throw on error.</param>
+        /// <returns>The added filter ID.</returns>
+        public NtStatus AddSubLayer(FirewallSubLayerBuilder builder, SecurityDescriptor security_descriptor, bool throw_on_error)
+        {
+            using (var list = new DisposableList())
+            {
+                var sd_buffer = security_descriptor != null ? list.AddResource(security_descriptor.ToSafeBuffer()) : SafeHGlobalBuffer.Null;
+                return FirewallNativeMethods.FwpmSubLayerAdd0(_handle, builder.ToStruct(list),
+                    sd_buffer).ToNtException(throw_on_error);
+            }
+        }
+
+        /// <summary>
         /// Get a callout by its key.
         /// </summary>
         /// <param name="key">The key of the callout.</param>

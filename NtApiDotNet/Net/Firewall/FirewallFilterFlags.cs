@@ -48,6 +48,8 @@ namespace NtApiDotNet.Net.Firewall
         SilentMode = 0x00000400,
         [SDKName("FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE")]
         IPSecNoAcquireInitiate = 0x00000800,
+        [SDKName("FWPM_FILTER_FLAG_HAS_FILTER_ORIGIN")]
+        HasFilterOrigin = 0x00001000,
     }
 }
 

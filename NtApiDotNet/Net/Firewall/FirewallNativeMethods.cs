@@ -1290,6 +1290,13 @@ namespace NtApiDotNet.Net.Firewall
         );
 
         [DllImport("Fwpuclnt.dll", CharSet = CharSet.Unicode)]
+        internal static extern Win32Error FwpmSubLayerAdd0(
+            SafeFwpmEngineHandle engineHandle,
+            in FWPM_SUBLAYER0 filter,
+            SafeBuffer sd // PSECURITY_DESCRIPTOR
+        );
+
+        [DllImport("Fwpuclnt.dll", CharSet = CharSet.Unicode)]
         internal static extern Win32Error FwpmSessionCreateEnumHandle0(
             SafeFwpmEngineHandle engineHandle,
             SafeBuffer enumTemplate, // FWPM_SESSION_ENUM_TEMPLATE0* 
